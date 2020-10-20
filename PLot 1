@@ -1,0 +1,10 @@
+# Plot 1 Using the base plotting system to analyse total emissions from PM2.5 decreased in the United States from 1999 to 2008 
+
+Total_Emissions <- summarise(group_by(NEI, year), Emissions=sum(Emissions))
+png(filename='plot1.png')
+x1<-barplot(height=Total_Emissions$Emissions/1000, names.arg= Total_Emissions$year,
+        xlab="years", ylab=expression('total PM'[2.5]*' emission in kilotons'),ylim=c(0,8000),
+        main=expression('Total PM'[2.5]*' emissions for different years in kilotons'))
+text(x = x1, y = round(Total_Emissions$Emissions/1000,2), label = round(Total_Emissions$Emissions/1000,2), pos = 3, cex = 0.8)
+dev.off()
+
