@@ -1,0 +1,11 @@
+#Plot 2 analysing if total emissions have decreased in the Baltimore City, Maryland (𝚏𝚒𝚙𝚜 == "𝟸𝟺𝟻𝟷𝟶") from 1999 to 2008 using the base plotting system 
+
+Baltimorecity_Emissions <- summarise(group_by(filter(NEI, fips == "24510"), year), Emissions=sum(Emissions))
+
+png(filename='plot2.png')
+x2<-barplot(height=Baltimorecity_Emissions$Emissions/1000, names.arg=Baltimorecity_Emissions$year,
+        xlab="years", ylab=expression('total PM'[2.5]*' emission in kilotons'),ylim=c(0,4),
+        main=expression('Total PM'[2.5]*' emissions in Baltimore City in kilotons'))
+text(x = x2, y = round(Baltimorecity_Emissions$Emissions/1000,2), label = round(Baltimorecity_Emissions$Emissions/1000,2), pos = 3, cex = 0.8)
+dev.off()
+
