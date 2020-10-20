@@ -1,0 +1,17 @@
+#Plot 3 to analyse which of the four variable (point, nonpoint, onroad, nonroad) decreases the emissions
+
+Year_Baltimorecity_Emissions<-summarise(group_by(filter(NEI, fips == "24510"), year,type), Emissions=sum(Emissions))
+
+png(filename='plot3.png')
+ggplot(Year_Baltimorecity_Emissions, aes(x=factor(year), y=Emissions, fill=type,label = round(Emissions,2))) +
+    geom_bar(stat="identity") +
+    #geom_bar(position = 'dodge')+
+    facet_grid(. ~ type) +
+    xlab("year") +
+    ylab(expression("total PM"[2.5]*" emission in tons")) +
+    ggtitle(expression("PM"[2.5]*paste(" emissions in Baltimore ",
+                                       "City by various source types", sep="")))+
+    geom_label(aes(fill = type), colour = "white", fontface = "bold")
+    
+dev.off()
+
