@@ -1,0 +1,14 @@
+#The most important task is to download the zip file and unzip them for analysis purpose
+
+library("data.table")
+path <- getwd()
+download.file(url = "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip", destfile = paste(path, "dataFiles.zip", sep = "/"))
+unzip(zipfile = "dataFiles.zip")
+
+#Reading the files
+
+NEI <- readRDS("exdata-data-NEI_data/summarySCC_PM25.rds")
+SCC <- readRDS("exdata-data-NEI_data/Source_Classification_Code.rds")
+
+
+
